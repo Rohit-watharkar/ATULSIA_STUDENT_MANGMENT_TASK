@@ -53,7 +53,7 @@ export default function PracticeExams() {
         Practice Exams
       </h2>
 
-      {/* Tabs */}
+   
       <div className="flex flex-wrap border-b mb-4 gap-2">
         {["new", "completed", "help"].map((tab) => (
           <button
@@ -70,7 +70,7 @@ export default function PracticeExams() {
         ))}
       </div>
 
-      {/* New Practice Tests */}
+     
       {activeTab === "new" && (
         <ul className="space-y-2 bg-white shadow-md rounded-xl p-4">
           {newTests.length > 0 ? (
@@ -106,7 +106,7 @@ export default function PracticeExams() {
         </ul>
       )}
 
-      {/* Completed Practice Tests */}
+     
       {activeTab === "completed" && (
         <ul className="space-y-2 bg-white shadow-md rounded-xl p-4">
           {completedTests.length > 0 ? (
@@ -134,7 +134,7 @@ export default function PracticeExams() {
         </ul>
       )}
 
-      {/* Help Tab */}
+    
       {activeTab === "help" && (
         <div className="space-y-2">
           <div className="bg-white shadow-md rounded-xl p-4 text-gray-600">
@@ -152,7 +152,7 @@ export default function PracticeExams() {
         </div>
       )}
 
-      {/* Preview Modal */}
+     
       {previewTest && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
           <div className="bg-white p-6 rounded-xl shadow-lg text-center max-w-md w-full">

@@ -54,7 +54,7 @@ export default function Notes() {
         Student Notes
       </h3>
 
-      {/* Select Test */}
+    
       <div className="mb-4 w-full">
         <label className="block mb-2 font-semibold text-sm sm:text-base">
           Select Test:
@@ -72,7 +72,7 @@ export default function Notes() {
               </option>
             ))}
           </select>
-          {/* Arrow icon */}
+         
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-600">
             <svg
               className="h-4 w-4"
@@ -87,11 +87,11 @@ export default function Notes() {
         </div>
       </div>
 
-      {/* Loading & Error */}
+     
       {loading && <p className="text-gray-600">Loading notes...</p>}
       {error && <p className="text-red-600">{error}</p>}
 
-      {/* Notes List */}
+     
       {!loading &&
         !error &&
         (notes.length > 0 ? (

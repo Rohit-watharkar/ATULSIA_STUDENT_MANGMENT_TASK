@@ -23,7 +23,7 @@ export default function Statistics() {
         console.error(err);
         setError("Failed to load statistics");
 
-        // fallback data
+      
         setStats({
           total: 12,
           byType: [

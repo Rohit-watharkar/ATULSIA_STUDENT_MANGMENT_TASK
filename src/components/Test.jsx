@@ -101,7 +101,7 @@ export default function Test() {
 
   return (
     <div className="p-4 sm:p-6 max-w-3xl mx-auto">
-      {/* Title */}
+     
       <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center sm:text-left">
         {examName}
       </h2>
@@ -111,7 +111,7 @@ export default function Test() {
           : "This is a submitted test. You can review the answers."}
       </p>
 
-      {/* Questions */}
+     
       <div className="bg-gray-100 p-4 sm:p-6 rounded-xl space-y-4">
         {questions.length === 0 && <p>No questions available for this exam.</p>}
         {questions.map((q) => (
@@ -139,14 +139,14 @@ export default function Test() {
             </div>
             {mode === "view" && (
               <p className="mt-2 text-green-600 text-sm sm:text-base">
-                ✅ Correct answer: {q.answer}
+                Correct answer: {q.answer}
               </p>
             )}
           </div>
         ))}
       </div>
 
-      {/* Submit button */}
+     
       {mode === "take" && questions.length > 0 && (
         <button
           className="mt-6 w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg text-sm sm:text-base hover:bg-blue-700 transition"
@@ -156,7 +156,7 @@ export default function Test() {
         </button>
       )}
 
-      {/* Success modal */}
+     
       {submitted && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-xl shadow-lg text-center max-w-sm w-full">

@@ -16,7 +16,7 @@ export default function ProfileCard() {
         console.error(err);
         setError("Failed to load profiles");
 
-        // Fallback profile
+        
         setProfiles([
           {
             photo: "/fallback-user.png",

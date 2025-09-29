@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // hamburger icons
+import { Menu, X } from "lucide-react"; 
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,7 @@ export default function Sidebar() {
 
   return (
     <div className="flex">
-      {/* Mobile toggle button */}
+      
       <button
         className="sm:hidden p-3 text-gray-800"
         onClick={() => setIsOpen(!isOpen)}
@@ -25,7 +25,7 @@ export default function Sidebar() {
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      {/* Sidebar */}
+      
       <div
         className={`fixed sm:static top-0 left-0 h-full w-64 bg-gray-800 text-white p-4 flex flex-col space-y-4 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -37,7 +37,7 @@ export default function Sidebar() {
             <NavLink
               key={link.name}
               to={link.path}
-              onClick={() => setIsOpen(false)} // close on mobile click
+              onClick={() => setIsOpen(false)} 
               className={({ isActive }) =>
                 `p-3 rounded hover:bg-gray-700 transition ${
                   isActive ? "bg-gray-700" : ""
