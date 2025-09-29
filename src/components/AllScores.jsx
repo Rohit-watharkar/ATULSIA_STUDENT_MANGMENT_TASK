@@ -10,8 +10,8 @@ export default function AllScores() {
     async function fetchAllScores() {
       try {
         setLoading(true);
-        const data = await getScores(); 
-        setAllScores(data.all || []); 
+        const data = await getScores();
+        setAllScores(data.all || []);
       } catch (err) {
         console.error(err);
         setError("Failed to load test-wise scores");
@@ -22,27 +22,36 @@ export default function AllScores() {
     fetchAllScores();
   }, []);
 
-  if (loading) return <p>Loading test-wise scores...</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
+  if (loading)
+    return <p className="text-center py-4">Loading test-wise scores...</p>;
+  if (error) return <p className="text-center text-red-600 py-4">{error}</p>;
 
   return (
-    <div className="bg-white shadow-md rounded-xl p-4">
-      <h3 className="text-lg font-bold mb-3">All Test Scores</h3>
+    <div className="bg-white shadow-md rounded-xl p-4 sm:p-6 lg:p-8 max-w-2xl mx-auto">
+      <h3 className="text-lg sm:text-xl font-bold mb-4 text-center sm:text-left">
+        All Test Scores
+      </h3>
 
       {allScores.length > 0 ? (
-        <ul className="space-y-2">
+        <ul className="space-y-3">
           {allScores.map((s, i) => (
             <li
               key={i}
-              className="flex justify-between items-center bg-gray-100 p-3 rounded-lg"
+              className="flex flex-col sm:flex-row justify-between sm:items-center bg-gray-100 p-3 sm:p-4 rounded-lg hover:bg-gray-200 transition"
             >
-              <span>{s.exam}</span>
-              <span className="font-semibold">{s.score}</span>
+              <span className="text-sm sm:text-base font-medium text-gray-700">
+                {s.exam}
+              </span>
+              <span className="text-base sm:text-lg font-semibold text-blue-600 mt-1 sm:mt-0">
+                {s.score}
+              </span>
             </li>
           ))}
         </ul>
       ) : (
-        <p className="text-gray-500">No scores available.</p>
+        <p className="text-gray-500 text-center sm:text-left">
+          No scores available.
+        </p>
       )}
     </div>
   );

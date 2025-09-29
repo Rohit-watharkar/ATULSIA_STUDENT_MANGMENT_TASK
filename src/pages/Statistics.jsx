@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { PieChart, Pie, Cell, Tooltip } from "recharts";
-import { getExams } from "../api/excelTestApi"; 
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { getExams } from "../api/excelTestApi";
 
 export default function Statistics() {
   const [stats, setStats] = useState({ total: 0, byType: [] });
@@ -23,7 +23,7 @@ export default function Statistics() {
         console.error(err);
         setError("Failed to load statistics");
 
-       
+        // fallback data
         setStats({
           total: 12,
           byType: [
@@ -39,34 +39,41 @@ export default function Statistics() {
     fetchStats();
   }, []);
 
-  if (loading) return <p>Loading statistics...</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
+  if (loading) return <p className="text-center py-6">Loading statistics...</p>;
+  if (error) return <p className="text-red-600 text-center py-6">{error}</p>;
 
   return (
-    <div className="bg-white shadow-md rounded-xl p-4">
-      <h3 className="text-lg font-bold mb-3">Statistics</h3>
-      <p>Total Tests Completed: {stats.total}</p>
+    <div className="bg-white shadow-md rounded-xl p-4 sm:p-6 max-w-md mx-auto">
+      <h3 className="text-lg sm:text-xl font-bold mb-4 text-center sm:text-left">
+        Statistics
+      </h3>
+      <p className="mb-4 text-gray-700 text-sm sm:text-base">
+        Total Tests Completed: <strong>{stats.total}</strong>
+      </p>
 
-      <PieChart width={250} height={250}>
-        <Pie
-          data={stats.byType}
-          dataKey="count"
-          nameKey="type"
-          cx="50%"
-          cy="50%"
-          outerRadius={80}
-          label
-        >
-          {stats.byType.map((entry, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={COLORS[index % COLORS.length]}
-            />
-          ))}
-        </Pie>
-        <Tooltip />
-      </PieChart>
+      <div className="w-full h-64 sm:h-80">
+        <ResponsiveContainer>
+          <PieChart>
+            <Pie
+              data={stats.byType}
+              dataKey="count"
+              nameKey="type"
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              label
+            >
+              {stats.byType.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
- 

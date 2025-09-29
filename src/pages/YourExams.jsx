@@ -31,24 +31,26 @@ export default function YourExams() {
 
   const ExamList = ({ exams, mode }) => {
     if (!exams.length)
-      return <p className="text-gray-500">No exams available.</p>;
+      return (
+        <p className="text-gray-500 py-4 text-center">No exams available.</p>
+      );
     return (
       <ul className="space-y-3">
         {exams.map((exam, i) => (
           <li
             key={i}
-            className="flex justify-between items-center bg-gray-300 p-3 rounded-lg hover:bg-gray-200"
+            className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition"
           >
-            <span>{exam.name}</span>
+            <span className="mb-2 sm:mb-0">{exam.name}</span>
             <button
-              className={`px-3 py-1 text-white rounded hover:opacity-90 ${
+              className={`px-4 py-2 rounded text-white text-sm sm:text-base hover:opacity-90 transition ${
                 mode === "take"
                   ? "bg-blue-600 hover:bg-blue-700"
                   : "bg-green-600 hover:bg-green-700"
               }`}
               onClick={() => handleOpenTest(exam.name, mode)}
             >
-              Open Test
+              {mode === "take" ? "Start Test" : "View Test"}
             </button>
           </li>
         ))}
@@ -56,35 +58,30 @@ export default function YourExams() {
     );
   };
 
-  return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Your Exams</h2>
+  const tabs = [
+    { id: "current", label: "Current", color: "blue" },
+    { id: "completed", label: "Completed", color: "green" },
+    { id: "help", label: "Help", color: "gray" },
+  ];
 
-    
-      <div className="flex border-b mb-4">
-        {["current", "completed", "help"].map((tab) => (
+  return (
+    <div className="p-4 sm:p-6 max-w-4xl mx-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center sm:text-left">
+        Your Exams
+      </h2>
+
+      <div className="flex flex-wrap border-b mb-4 space-x-2">
+        {tabs.map((tab) => (
           <button
-            key={tab}
+            key={tab.id}
             className={`px-4 py-2 -mb-px font-semibold border-b-2 ${
-              activeTab === tab
-                ? `border-${
-                    tab === "current"
-                      ? "blue"
-                      : tab === "completed"
-                      ? "green"
-                      : "gray"
-                  }-600 text-${
-                    tab === "current"
-                      ? "blue"
-                      : tab === "completed"
-                      ? "green"
-                      : "gray"
-                  }-600`
+              activeTab === tab.id
+                ? `border-${tab.color}-600 text-${tab.color}-600`
                 : "border-transparent text-gray-600 hover:text-gray-700"
-            }`}
-            onClick={() => setActiveTab(tab)}
+            } transition`}
+            onClick={() => setActiveTab(tab.id)}
           >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {tab.label}
           </button>
         ))}
       </div>
@@ -96,13 +93,13 @@ export default function YourExams() {
       {activeTab === "help" && (
         <div className="space-y-2">
           <div className="bg-white shadow-md rounded-xl p-4 text-gray-600">
-            <p>
+            <p className="text-sm sm:text-base">
               Don’t see your test here? Please contact your instructor or check
               your schedule to ensure the exam is assigned to you.
             </p>
           </div>
           <button
-            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition w-full sm:w-auto"
             onClick={() => navigate("/helpUs")}
           >
             Go to Help
